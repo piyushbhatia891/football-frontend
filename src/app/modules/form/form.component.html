@@ -1,0 +1,40 @@
+<div class="form-container">
+    <div class="standings">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+        Country:<input type="text" formControlName="country" class="form-control">
+        <div class="alert alert-danger" *ngIf="submitted && form.get('country').hasError('required')">
+            Country Name is required</div>
+        League:<input type="text" class="form-control" formControlName="league">
+         <div class="alert alert-danger" *ngIf="submitted && form.get('league').hasError('required')">
+            League Name is required</div>
+        Team:<input type="text" class="form-control" formControlName="team">
+        <div class="alert alert-danger" *ngIf="submitted && form.get('team').hasError('required')">
+            Team Name is required</div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+<div *ngIf="error!=''">
+    {{error}}
+</div>
+<div *ngIf="standings!=null" class="panel-body">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Country</th>
+                <th>League</th>
+                <th>Team</th> 
+                <th>Position</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let standing of standings">
+                <td>{{standing.country.country_id}} - {{standing.country.country_name}}</td>
+                <td>{{standing.league.league_id}} - {{standing.league.league_name}}</td>
+                <td>{{standing.team.team_key}} - {{standing.team.team_name}}</td>
+                <td>{{standing.standing}}</td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+</div>
